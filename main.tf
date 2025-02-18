@@ -20,7 +20,7 @@ resource "aws_instance" "jenkins-worker" {
     connection {
     type     = "ssh"
     user     = "ubuntu"
-    private_key = file("/Users/sundayfagbuaro/Downloads/my-lab-key.pem")
+    private_key = file("/home/bobosunne/my-lab-key.pem")
     host     = self.public_ip
     
   }
