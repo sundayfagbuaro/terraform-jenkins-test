@@ -20,7 +20,8 @@ resource "aws_instance" "jenkins-worker" {
     connection {
     type     = "ssh"
     user     = "ubuntu"
-    private_key = file("/home/bobosunne/my-lab-key.pem")
+  #  private_key = file("/home/bobosunne/my-lab-key.pem")
+    private_key = "my-lab-key"
     host     = self.public_ip
     
   }
@@ -38,5 +39,6 @@ resource "aws_instance" "jenkins-worker" {
       "exit"
     ]  
   }
+
 }
 
