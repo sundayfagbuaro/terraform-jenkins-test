@@ -1,5 +1,10 @@
 pipeline {
     agent any
+
+    environment {
+        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACEESS_KEY = credentials('AWS_SECRET_ACEESS_KEY')
+    }
     
     stages {
         stage('Cleanup Workspace'){
