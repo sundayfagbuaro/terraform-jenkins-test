@@ -5,7 +5,7 @@ output "public_ips" {
 }
 
 */
-output "jenkins-master-pub-ip" {
+output "jenkins-worker-pub-ip" {
     value = aws_instance.jenkins-worker.public_ip
   
 }
