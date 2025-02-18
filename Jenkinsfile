@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    environment {
+//    environment {
 //        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
 //        AWS_SECRET_ACEESS_KEY = credentials('AWS_SECRET_ACEESS_KEY')
 //        withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'Jenkins-cicd-user', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
@@ -34,16 +34,6 @@ pipeline {
         }
 
         stage('Apply Terraform Plan'){
-            withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'Jenkins-cicd-user', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-            steps{
-                sh """ 
-                   terraform apply --auto-approve
- 
-                """
-                
-            }       
-}
-    }
             steps{
                 sh """ 
                    terraform apply --auto-approve
@@ -54,4 +44,4 @@ pipeline {
         }
         
     }   
-} 
+}
