@@ -2,8 +2,11 @@ pipeline {
     agent any
 
     environment {
-        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_ACEESS_KEY = credentials('AWS_SECRET_ACEESS_KEY')
+//        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+//        AWS_SECRET_ACEESS_KEY = credentials('AWS_SECRET_ACEESS_KEY')
+        withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'Jenkins-cicd-user', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+    // some block
+}
     }
     
     stages {
