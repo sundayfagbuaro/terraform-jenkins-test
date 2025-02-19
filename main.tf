@@ -5,7 +5,7 @@ provider "aws" {
 }
 
 
-resource "aws_instance" "jenkins-test-ec2" {
+resource "aws_instance" "test-ec2" {
     ami = var.ami_id
     instance_type = var.instance_type
     subnet_id = var.subnet_id
@@ -14,7 +14,7 @@ resource "aws_instance" "jenkins-test-ec2" {
 #    count = var.ec2_count
 
     tags = {
-      Name = "jenkins-test-ec2"
+      Name = "test-ec2"
     }
 
 
