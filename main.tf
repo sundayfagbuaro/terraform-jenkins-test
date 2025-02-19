@@ -1,45 +1,47 @@
 provider "aws" {
-    region = "eu-west-2"
-    access_key = ""
-  
+  region = "eu-west-2"
 }
 
 
-resource "aws_instance" "test-ec2" {
-    ami = var.ami_id
-    instance_type = var.instance_type
-    subnet_id = var.subnet_id
-    key_name = "my-lab-key"
-    security_groups = var.sgs_value
-#    count = var.ec2_count
-
-    tags = {
-      Name = "test-ec2"
-    }
-
-/*
-    connection {
-    type     = "ssh"
-    user     = "ubuntu"
-  #  private_key = file("/home/bobosunne/my-lab-key.pem")
-    private_key = "my-lab-key"
-    host     = self.public_ip
-    
-  }
-
-  provisioner "file" {
-    source = "installation_script.sh"
-    destination = "/home/ubuntu/installation_script.sh"
-    
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "sudo chmod +x installation_script.sh",
-      "sudo ./installation_script.sh",
-      "exit"
-    ]  
-  }
-*/
+resource "aws_launch_template" "app" {
+  name_prefix   = "app-template-"
+  image_id      = data.aws_ami.latest_amazon_linux.id
+  instance_type = "t3.micro"
+  network_interfaces {
+    associate_public_ip_address = true
+    security_groups = [aws_security_group.app_sg.id]
+} 
 }
+
+
+resource "aws_autoscaling_group" "app" {
+  vpc_zone_identifier = data.aws_subnets.default.ids
+  desired_capacity      = 2
+  max_size              = 5
+  min_size              = 2
+  health_check_type  = "ELB"
+  launch_template {
+    id      = aws_launch_template.app.id
+    version = "$Latest"
+} 
+}
+
+resource "aws_security_group" "app_sg" {
+  name_prefix = "app-sg-"
+  description = "Allow inbound traffic"
+
+  ingress {
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+}
+  egress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+} 
+}
+
 

@@ -1,52 +1,29 @@
-
-variable "ami_id" {
-    default = "ami-091f18e98bc129c4e"
-  
+variable "instance_count" {
+  default = 2
 }
 
-variable "instance_type" {
-    default = "t2.micro"
-  
+output "instance_ips" {
+  value = [for i in aws_autoscaling_group.app: i.id]
 }
 
-variable "subnet_id" {
-    default = "subnet-032926b7963f02cd6"
-  
-}
-
-variable "sgs_value" {
-    default = ["sg-04ce3a9c3d658c0cd"]
-  
-}
-
-#variable "ec2_count" {
-#    default = 1
-  
-#}
-
-variable "tags_value" {
-    default = "jenkins-host"
+output "lb_dns" {
+  value = aws_lb.app_lb.dns_name
 }
 
 
-/*
-variable "foreach" {
-    default = {
-        jenkins-master = {
-            ami_id = "ami-091f18e98bc129c4e"
-            instance_type = "t2.micro"
-            subnet_id = "subnet-032926b7963f02cd6"
-            security_groups = ["sg-04ce3a9c3d658c0cd"]
-
-        }
-        jenkins-worker = {
-            ami_id = "ami-091f18e98bc129c4e"
-            instance_type = "t2.micro"
-            subnet_id = "subnet-032926b7963f02cd6"
-            security_groups = ["sg-04ce3a9c3d658c0cd"]
-        }
-  
-    }
+data "aws_vpc" "default" {
+  default = true
 }
-*/
+
+data "aws_subnets" "default" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.default.id]
+  }
+}
+
+data "aws_ami" "latest_amazon_linux" {
+  most_recent = true
+  owners      = ["amazon"]
+}
 
