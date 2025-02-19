@@ -1,19 +1,15 @@
 pipeline {
     agent any
 
-    stages {
-        stage('AWS CRED TEST') {
-            steps {
-                withCredentials([
-                    aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
-                    credentialsId: 'Jenkins-cicd-user', 
-                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+//    environment {
+//        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+//        AWS_SECRET_ACEESS_KEY = credentials('AWS_SECRET_ACEESS_KEY')
+//        withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'Jenkins-cicd-user', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+    // some block
+//}
+ //   }
     
-                        sh "aws s3 ls"
-                    }
-            }
-        }
-
+    stages {
         stage('Cleanup Workspace'){
             steps{
                 cleanWs()
@@ -37,7 +33,7 @@ pipeline {
             }
         }
 
-        stage('Terraform Apply'){
+        stage('Apply Terraform Plan'){
             steps{
                 sh """ 
                    terraform apply --auto-approve
@@ -46,6 +42,6 @@ pipeline {
                 
             }                   
         }
-
-    }
+        
+    }   
 }
