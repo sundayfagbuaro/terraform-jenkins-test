@@ -32,7 +32,7 @@ pipeline {
                     credentialsId: 'Jenkins-cicd-user', 
                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
     
-                        sh "terraform ${action} --auto-approve"
+                        sh "terraform ${Actions} --auto-approve"
                     }
             }             
         }
