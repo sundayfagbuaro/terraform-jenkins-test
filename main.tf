@@ -49,7 +49,8 @@ resource "aws_lb" "app_lb" {
   name               = "app-lb"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = [aws_security_group.lb_sg.id]
+#  security_groups    = [aws_security_group.lb_sg.id]
+  security_groups    = [aws_security_group.app_sg.id]
   subnets           = data.aws_subnets.default.ids
 }
 
