@@ -14,7 +14,6 @@ pipeline {
         stage('Run Terraform init'){
             steps{
                 sh """
-                    cd auto_scaling_project
                     terraform init
                 """
             }
