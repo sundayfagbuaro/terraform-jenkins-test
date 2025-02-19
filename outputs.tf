@@ -10,7 +10,7 @@ output "jenkins-worker-pub-ip" {
   
 }
 
-output "jenkins-worker-pub-ip" {
+output "jenkins-worker-pub-dns" {
     value = aws_instance.jenkins-test-ec2.public_dns
   
 }
