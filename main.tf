@@ -17,7 +17,7 @@ resource "aws_instance" "test-ec2" {
       Name = "test-ec2"
     }
 
-
+/*
     connection {
     type     = "ssh"
     user     = "ubuntu"
@@ -40,6 +40,6 @@ resource "aws_instance" "test-ec2" {
       "exit"
     ]  
   }
-
+*/
 }
 
