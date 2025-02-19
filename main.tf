@@ -17,7 +17,7 @@ resource "aws_instance" "jenkins-test-ec2" {
       Name = "jenkins-test-ec2"
     }
 
-/*
+
     connection {
     type     = "ssh"
     user     = "ubuntu"
@@ -40,6 +40,6 @@ resource "aws_instance" "jenkins-test-ec2" {
       "exit"
     ]  
   }
-*/
+
 }
 
