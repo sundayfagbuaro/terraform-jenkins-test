@@ -25,14 +25,14 @@ pipeline {
             }
         }
 
-        stage('Terraform Apply'){
+        stage('Terraform action'){
             steps {
                 withCredentials([
                     aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
                     credentialsId: 'Jenkins-cicd-user', 
                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
     
-                        sh "terraform apply --auto-approve"
+                        sh "terraform ${action} --auto-approve"
                     }
             }             
         }
