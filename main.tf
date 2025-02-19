@@ -9,7 +9,7 @@ resource "aws_instance" "jenkins-test-ec2" {
     ami = var.ami_id
     instance_type = var.instance_type
     subnet_id = var.subnet_id
-#    key_name = "my-lab-key"
+    key_name = "my-lab-key"
     security_groups = var.sgs_value
 #    count = var.ec2_count
 
