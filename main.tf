@@ -1,10 +1,11 @@
 provider "aws" {
     region = "eu-west-2"
+    access_key = ""
   
 }
 
 
-resource "aws_instance" "jenkins-worker" {
+resource "aws_instance" "jenkins-test-ec2" {
     ami = var.ami_id
     instance_type = var.instance_type
     subnet_id = var.subnet_id
@@ -13,7 +14,7 @@ resource "aws_instance" "jenkins-worker" {
 #    count = var.ec2_count
 
     tags = {
-      Name = "jenkins-worker"
+      Name = "jenkins-test-ec2"
     }
 
 /*
