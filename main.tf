@@ -70,3 +70,9 @@ resource "aws_lb_listener" "http" {
         target_group_arn = aws_lb_target_group.app_tg.arn
     } 
 }
+
+resource "aws_lb_target_group_attachment" "app_lb_attach" {
+  target_group_arn = aws_lb_target_group.app_tg.arn
+  target_id        = aws_autoscaling_group.app.id
+  port             = 80
+}
