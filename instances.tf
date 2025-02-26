@@ -8,6 +8,10 @@ resource "aws_launch_template" "app" {
     security_groups = [aws_security_group.custom_sg.id]
   }
   user_data = filebase64("user_data.sh")
+
+  tags = {
+    Name = "Web-Server"
+  }
 }
 
 
