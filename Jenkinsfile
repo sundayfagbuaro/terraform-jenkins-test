@@ -14,6 +14,7 @@ pipeline {
         stage('Run Terraform init'){
             steps{
                 sh """
+                    cd asg_project
                     terraform init
                 """
             }
