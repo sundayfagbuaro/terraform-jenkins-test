@@ -18,9 +18,9 @@ resource "aws_launch_template" "app" {
 resource "aws_autoscaling_group" "app" {
   #  vpc_zone_identifier = ["${aws_subnet.public_subnet[0].id},${aws_subnet.public_subnet[1].id}"]
   vpc_zone_identifier = aws_subnet.public_subnet[*].id
-  desired_capacity    = 2
+  desired_capacity    = 3
   max_size            = 5
-  min_size            = 2
+  min_size            = 3
   target_group_arns   = [aws_lb_target_group.custom_alb_target_group.arn]
   health_check_type   = "EC2"
 
