@@ -5,7 +5,7 @@ pipeline {
         stage('SCM Checkout') {
             steps {
                 script {
-                    git branch: 'main', credentialsId: 'git_cred', url: 'https://github.com/sundayfagbuaro/terraform-jenkins-test.git'
+                    git branch: 'RDS_MYSQL', credentialsId: 'git_cred', url: 'https://github.com/sundayfagbuaro/terraform-jenkins-test.git'
                 
                 }
             }
