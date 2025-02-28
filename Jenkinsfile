@@ -18,18 +18,20 @@ pipeline {
             }
         }
 
-        stage('Terraform action'){
+        stage('Terraform ${Actions}'){
             steps {
-                
+
                 withCredentials([
                     aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
-                    credentialsId: 'Jenkins-aws-cred', 
-                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    credentialsId: 'jenkins-aws-cred', 
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
     
                          sh "terraform ${Actions} --auto-approve"
-                    }
+                }
             }             
         }
 
     }
 }
+
+
