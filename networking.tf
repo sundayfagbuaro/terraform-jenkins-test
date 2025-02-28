@@ -30,17 +30,17 @@ resource "aws_db_subnet_group" "database_subnet_group" {
 }
 
 # Create security group for the database
-resource "aws_security_group" "database_security_group" {
-    name = "database security group"
-    description = "enable aurora/mysql access on port 3306"
-    vpc_id = data.aws_vpc.default_vpc.id
+resource "aws_security_group" "database_sg" {
+  name        = "database_security_group"
+  description = "Enable mysql/aurora access on port 3306"
+  vpc_id      = aws_default_vpc.default_vpc.id
 
-    ingress {
-    description = "rds/mysql"
-    protocol    = "tcp"
-    from_port   = 3306
-    to_port     = 3306
-    security_groups = [aws_db_subnet_group.database_subnet_group.id]
+  ingress {
+    description     = "mysql/aurora access"
+    protocol        = "tcp"
+    from_port       = 3306
+    to_port         = 3306
+    security_groups = [aws_security_group.custom_security_group.id]
   }
 
   egress {
@@ -53,9 +53,7 @@ resource "aws_security_group" "database_security_group" {
   tags = {
     Name = "database_security_group"
   }
-  
 }
-
 
 # security group for webserver
 resource "aws_security_group" "custom_security_group" {
