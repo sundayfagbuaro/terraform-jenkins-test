@@ -18,7 +18,7 @@ pipeline {
             }
         }
 
-        stage('Terraform ${Actions}'){
+        stage('Terraform Action'){
             steps {
 
                 withCredentials([
